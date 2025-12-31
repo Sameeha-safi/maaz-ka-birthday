@@ -1,141 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Maaz 🎉</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday Maaz 💙</title>
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #020617, #1e3a8a);
-      font-family: 'Inter', sans-serif;
-    }
+<!-- Handwritten font -->
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-    .step {
-      display: none;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 24px;
-      color: white;
-    }
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top,#1e3a8a,#020617);
+  overflow:hidden;
+}
 
-    .step.active {
-      display: block;
-      animation: fade 0.7s ease;
-    }
+/* 🌌 Stars */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  opacity:0.8;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:0.3;}
+  to{opacity:1;}
+}
 
-    @keyframes fade {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* 💎 Card */
+.card{
+  display:none;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(14px);
+  border-radius:28px;
+  padding:24px;
+  animation:up 0.8s ease;
+}
+.card.active{display:block;}
+@keyframes up{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
 
-    .btn {
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      padding: 12px 24px;
-      border-radius: 999px;
-      font-weight: 600;
-      margin-top: 20px;
-      width: 100%;
-    }
-  </style>
+.btn{
+  background:linear-gradient(135deg,#60a5fa,#2563eb);
+  padding:14px;
+  border-radius:999px;
+  font-weight:600;
+  width:100%;
+  margin-top:18px;
+}
+
+/* ✍️ Letter */
+.letter{
+  font-family:'Patrick Hand',cursive;
+  font-size:1.1rem;
+  line-height:1.6;
+}
+.float{
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+</style>
 </head>
 
-<body class="flex items-center justify-center p-4">
+<body class="flex items-center justify-center min-h-screen p-4 text-white">
 
-  <!-- MUSIC -->
-  <audio id="bgMusic" loop>
-    <source src="music/talwiinder.mp3" type="audio/mpeg">
-  </audio>
+<!-- 🎵 Music -->
+<audio id="music" loop>
+  <source src="music/talwiinder.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- STEP 1 -->
-  <div id="step1" class="step active max-w-md w-full text-center">
-    <h1 class="text-3xl font-bold mb-4">Hey Maaz 👋</h1>
-    <p class="opacity-90">I made this just for you…</p>
-    <button class="btn" onclick="start()">Start 🎵</button>
+<!-- ⭐ Stars -->
+<script>
+for(let i=0;i<80;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(s);
+}
+</script>
+
+<!-- STEP 1 -->
+<div id="s1" class="card active max-w-sm w-full text-center">
+  <div class="text-6xl float">🧸💙</div>
+  <h1 class="text-3xl font-bold mt-4">Hey Maaz</h1>
+  <p class="opacity-90 mt-2">
+    I made this tiny cute universe just for you ✨
+  </p>
+  <button class="btn" onclick="start()">Enter 🌙</button>
+</div>
+
+<!-- STEP 2 -->
+<div id="s2" class="card max-w-sm w-full text-center">
+  <div class="text-6xl float">🎂✨</div>
+  <h2 class="text-3xl font-bold mt-4">Happy Birthday</h2>
+  <p class="opacity-90 mt-3">
+    The stars shine a little brighter today 🌌
+  </p>
+  <button class="btn" onclick="go(3)">Next 💫</button>
+</div>
+
+<!-- STEP 3 -->
+<div id="s3" class="card max-w-sm w-full">
+  <h2 class="text-2xl font-bold text-center mb-4">Why You’re Special 🧸</h2>
+  <div class="space-y-3">
+    <div class="bg-white text-black rounded-xl p-3">🌟 Calm soul</div>
+    <div class="bg-white text-black rounded-xl p-3">🤍 Safe energy</div>
+    <div class="bg-white text-black rounded-xl p-3">🫶 Always real</div>
   </div>
+  <button class="btn" onclick="go(4)">Letter ✍️</button>
+</div>
 
-  <!-- STEP 2 -->
-  <div id="step2" class="step max-w-md w-full text-center">
-    <h2 class="text-3xl font-bold mb-4">🎉 Happy Birthday 🎉</h2>
-    <p class="opacity-90">
-      Another year older, stronger, and more legendary.
-    </p>
-    <button class="btn" onclick="next(3)">See Why You’re Special 💙</button>
+<!-- STEP 4 LETTER -->
+<div id="s4" class="card max-w-sm w-full">
+  <h2 class="text-2xl font-bold text-center mb-4">A Little Letter 💌</h2>
+  <p class="letter">
+    Dear Maaz,<br><br>
+    I hope you always know how special you are.
+    Your presence feels calm, warm, and safe —
+    like a quiet night sky full of stars 🌙✨<br><br>
+    I’m really grateful for you.
+  </p>
+  <button class="btn" onclick="go(5)">Memories 📸</button>
+</div>
+
+<!-- STEP 5 PHOTOS -->
+<div id="s5" class="card max-w-sm w-full text-center">
+  <h2 class="text-2xl font-bold mb-3">Cute Moments 💙</h2>
+  <div class="grid grid-cols-3 gap-2">
+    <img src="images/maaz1.jpg" class="rounded-2xl">
+    <img src="images/maaz2.jpg" class="rounded-2xl">
+    <img src="images/maaz3.jpg" class="rounded-2xl">
   </div>
+  <button class="btn" onclick="go(6)">Final 🌠</button>
+</div>
 
-  <!-- STEP 3 -->
-  <div id="step3" class="step max-w-md w-full text-center">
-    <h2 class="text-2xl font-bold mb-4">Why Maaz is Different 😎</h2>
-    <div class="space-y-3 text-left">
-      <div class="bg-white text-black rounded-xl p-3">🔥 Always confident</div>
-      <div class="bg-white text-black rounded-xl p-3">🤝 Loyal best friend</div>
-      <div class="bg-white text-black rounded-xl p-3">💯 Never fake</div>
-    </div>
-    <button class="btn" onclick="next(4)">Photos Time 📸</button>
-  </div>
+<!-- STEP 6 -->
+<div id="s6" class="card max-w-sm w-full text-center">
+  <div class="text-6xl float">🌌🧸</div>
+  <h2 class="text-3xl font-bold mt-4">Happy Birthday Maaz</h2>
+  <p class="opacity-90 mt-3">
+    May life be kind to you,
+    and dreams always find you.
+  </p>
+  <button class="btn" onclick="celebrate()">Celebrate 🎉</button>
+  <p class="text-xs opacity-70 mt-5">
+    Made with soft vibes & stars ✨
+  </p>
+</div>
 
-  <!-- STEP 4 (PHOTOS) -->
-  <div id="step4" class="step max-w-md w-full text-center">
-    <h2 class="text-2xl font-bold mb-4">Some Moments 💙</h2>
-
-    <div class="grid grid-cols-3 gap-2">
-      <img src="images/maaz1.jpg" class="rounded-xl">
-      <img src="images/maaz2.jpg" class="rounded-xl">
-      <img src="images/maaz3.jpg" class="rounded-xl">
-    </div>
-
-    <p class="mt-4 opacity-80 text-sm">
-      Every picture has a story.
-    </p>
-
-    <button class="btn" onclick="next(5)">Final Message 🎂</button>
-  </div>
-
-  <!-- STEP 5 -->
-  <div id="step5" class="step max-w-md w-full text-center">
-    <h2 class="text-3xl font-bold mb-4">🎂 Cheers to You 🎂</h2>
-    <p class="opacity-90 mb-4">
-      May this year bring success, peace,
-      good health and big wins.
-    </p>
-    <p class="font-semibold mb-6">Happy Birthday Maaz 💙</p>
-    <button class="btn" onclick="celebrate()">Celebrate 🎉</button>
-    <p class="mt-6 text-sm opacity-70">Made with 💙 by your bestie</p>
-  </div>
-
-  <script>
-    function start() {
-      document.getElementById("bgMusic").play();
-      next(2);
-    }
-
-    function next(step) {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      document.getElementById('step' + step).classList.add('active');
-    }
-
-    function celebrate() {
-      confetti({
-        particleCount: 250,
-        spread: 90,
-        origin: { y: 0.6 }
-      });
-    }
-  </script>
+<script>
+function start(){
+  document.getElementById("music").play();
+  go(2);
+}
+function go(n){
+  document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+  document.getElementById("s"+n).classList.add("active");
+}
+function celebrate(){
+  confetti({particleCount:220,spread:100,origin:{y:0.6}});
+}
+</script>
 
 </body>
 </html>
