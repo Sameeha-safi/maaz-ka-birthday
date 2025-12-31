@@ -2,88 +2,96 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Happy Birthday Maaz 💙</title>
 
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<!-- Handwritten font -->
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; }
+
 body{
   margin:0;
+  min-height:100vh;
   font-family:'Poppins',sans-serif;
-  background:radial-gradient(circle at top,#1e3a8a,#020617);
+  background: radial-gradient(circle at top, #1e3a8a, #020617);
   overflow:hidden;
 }
 
-/* 🌌 Stars */
+/* ⭐ Night sky stars */
 .star{
   position:absolute;
   width:2px;
   height:2px;
   background:white;
   border-radius:50%;
-  opacity:0.8;
-  animation:twinkle 2s infinite alternate;
+  opacity:.7;
+  animation: twinkle 2s infinite alternate;
 }
 @keyframes twinkle{
-  from{opacity:0.3;}
+  from{opacity:.2;}
   to{opacity:1;}
 }
 
 /* 💎 Card */
 .card{
   display:none;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);
-  border-radius:28px;
-  padding:24px;
-  animation:up 0.8s ease;
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+  padding: 24px;
+  animation: rise .8s ease;
 }
-.card.active{display:block;}
-@keyframes up{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.btn{
-  background:linear-gradient(135deg,#60a5fa,#2563eb);
-  padding:14px;
-  border-radius:999px;
-  font-weight:600;
-  width:100%;
-  margin-top:18px;
+.card.active{ display:block; }
+@keyframes rise{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-/* ✍️ Letter */
+/* ✍️ Handwritten */
 .letter{
   font-family:'Patrick Hand',cursive;
-  font-size:1.1rem;
+  font-size:1.15rem;
   line-height:1.6;
 }
+
+/* 🧸 Floating cartoon */
 .float{
-  animation:float 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
 }
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
+  50%{transform:translateY(-12px);}
+}
+
+.btn{
+  background: linear-gradient(135deg,#60a5fa,#2563eb);
+  padding:14px;
+  border-radius:999px;
+  width:100%;
+  font-weight:600;
+  margin-top:18px;
 }
 </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-4 text-white">
+<body class="flex items-center justify-center p-4 text-white">
 
-<!-- 🎵 Music -->
+<!-- 🎵 MUSIC -->
 <audio id="music" loop>
   <source src="music/talwiinder.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ⭐ Stars -->
+<!-- ⭐ Stars generation -->
 <script>
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
   const s=document.createElement("div");
   s.className="star";
   s.style.left=Math.random()*100+"vw";
@@ -97,19 +105,15 @@ for(let i=0;i<80;i++){
 <div id="s1" class="card active max-w-sm w-full text-center">
   <div class="text-6xl float">🧸💙</div>
   <h1 class="text-3xl font-bold mt-4">Hey Maaz</h1>
-  <p class="opacity-90 mt-2">
-    I made this tiny cute universe just for you ✨
-  </p>
+  <p class="opacity-90 mt-2">I made this cute night-sky world just for you ✨</p>
   <button class="btn" onclick="start()">Enter 🌙</button>
 </div>
 
 <!-- STEP 2 -->
 <div id="s2" class="card max-w-sm w-full text-center">
-  <div class="text-6xl float">🎂✨</div>
+  <div class="text-6xl float">🎂🌌</div>
   <h2 class="text-3xl font-bold mt-4">Happy Birthday</h2>
-  <p class="opacity-90 mt-3">
-    The stars shine a little brighter today 🌌
-  </p>
+  <p class="opacity-90 mt-3">The universe feels softer today because of you.</p>
   <button class="btn" onclick="go(3)">Next 💫</button>
 </div>
 
@@ -117,7 +121,7 @@ for(let i=0;i<80;i++){
 <div id="s3" class="card max-w-sm w-full">
   <h2 class="text-2xl font-bold text-center mb-4">Why You’re Special 🧸</h2>
   <div class="space-y-3">
-    <div class="bg-white text-black rounded-xl p-3">🌟 Calm soul</div>
+    <div class="bg-white text-black rounded-xl p-3">🌟 Calm presence</div>
     <div class="bg-white text-black rounded-xl p-3">🤍 Safe energy</div>
     <div class="bg-white text-black rounded-xl p-3">🫶 Always real</div>
   </div>
@@ -129,10 +133,10 @@ for(let i=0;i<80;i++){
   <h2 class="text-2xl font-bold text-center mb-4">A Little Letter 💌</h2>
   <p class="letter">
     Dear Maaz,<br><br>
-    I hope you always know how special you are.
-    Your presence feels calm, warm, and safe —
-    like a quiet night sky full of stars 🌙✨<br><br>
-    I’m really grateful for you.
+    I hope you always remember how special you are.
+    Your presence feels like a calm night sky —
+    quiet, warm, and full of light 🌙✨<br><br>
+    I’m grateful for you, always.
   </p>
   <button class="btn" onclick="go(5)">Memories 📸</button>
 </div>
@@ -152,14 +156,9 @@ for(let i=0;i<80;i++){
 <div id="s6" class="card max-w-sm w-full text-center">
   <div class="text-6xl float">🌌🧸</div>
   <h2 class="text-3xl font-bold mt-4">Happy Birthday Maaz</h2>
-  <p class="opacity-90 mt-3">
-    May life be kind to you,
-    and dreams always find you.
-  </p>
+  <p class="opacity-90 mt-3">May life be gentle and kind to you.</p>
   <button class="btn" onclick="celebrate()">Celebrate 🎉</button>
-  <p class="text-xs opacity-70 mt-5">
-    Made with soft vibes & stars ✨
-  </p>
+  <p class="text-xs opacity-70 mt-5">Made with stars & love ✨</p>
 </div>
 
 <script>
@@ -172,7 +171,7 @@ function go(n){
   document.getElementById("s"+n).classList.add("active");
 }
 function celebrate(){
-  confetti({particleCount:220,spread:100,origin:{y:0.6}});
+  confetti({particleCount:250,spread:100,origin:{y:.6}});
 }
 </script>
 
