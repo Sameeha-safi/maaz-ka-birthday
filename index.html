@@ -37,7 +37,6 @@ body {
   position: relative;
 }
 
-/* ANIMATED GRADIENT BACKGROUND */
 .gradient-bg {
   position: fixed;
   top: 0;
@@ -56,7 +55,42 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* STARS */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float-particle linear infinite;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px) scale(1);
+    opacity: 0;
+  }
+}
+
 .stars {
   position: fixed;
   top: 0;
@@ -82,68 +116,14 @@ body {
   to { opacity: 1; transform: scale(1.2); }
 }
 
-/* FLOATING HEARTS */
-.floating-hearts {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.heart {
-  position: absolute;
-  animation: floatHeart linear infinite;
-  opacity: 0.8;
-}
-
-@keyframes floatHeart {
-  0% {
-    transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.5);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-10vh) translateX(100px) rotate(360deg) scale(1);
-    opacity: 0;
-  }
-}
-
-/* GLASS MORPHISM */
 .glass {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
               0 0 100px rgba(102, 126, 234, 0.2);
-  position: relative;
 }
 
-.glass::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(102, 126, 234, 0.05) 100%);
-  border-radius: 30px;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-/* CONTAINER */
 .container {
   position: relative;
   z-index: 10;
@@ -154,7 +134,6 @@ body {
   padding: 2rem;
 }
 
-/* CARD */
 .card {
   display: none;
   max-width: 600px;
@@ -198,7 +177,6 @@ body {
   }
 }
 
-/* TYPOGRAPHY */
 .hero-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -209,6 +187,7 @@ body {
   color: transparent;
   line-height: 1.2;
   margin-bottom: 1rem;
+  text-shadow: 0 10px 30px rgba(255, 216, 155, 0.3);
 }
 
 .subtitle {
@@ -218,7 +197,19 @@ body {
   font-weight: 400;
 }
 
-/* QUOTE CARD */
+.emoji-float {
+  font-size: clamp(4rem, 10vw, 6rem);
+  animation: floatSmooth 4s ease-in-out infinite;
+  display: inline-block;
+  margin: 1rem 0;
+  filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.3));
+}
+
+@keyframes floatSmooth {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-25px) rotate(5deg); }
+}
+
 .quote-box {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -227,7 +218,6 @@ body {
   margin: 1.5rem 0;
   position: relative;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
 }
 
 .quote-box::before {
@@ -241,29 +231,10 @@ body {
   line-height: 1;
 }
 
-.quote-box::after {
-  content: '';
-  position: absolute;
-  bottom: -50px;
-  right: -50px;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(240, 147, 251, 0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  transition: all 0.4s ease;
-}
-
 .quote-box:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
   border-color: rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
-}
-
-.quote-box:hover::after {
-  bottom: -30px;
-  right: -30px;
-  background: radial-gradient(circle, rgba(240, 147, 251, 0.25) 0%, transparent 70%);
 }
 
 .quote-text {
@@ -283,7 +254,6 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* TRAITS */
 .traits-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -337,7 +307,6 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* PHOTO GRID */
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -356,7 +325,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
 }
 
 .photo-item img {
@@ -372,7 +340,6 @@ body {
   z-index: 10;
 }
 
-/* BUTTON */
 .btn {
   background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
   color: #1a1a2e;
@@ -419,7 +386,6 @@ body {
   transform: translateY(0);
 }
 
-/* LETTER */
 .letter-content {
   font-family: 'DM Sans', sans-serif;
   font-size: 1.15rem;
@@ -432,7 +398,6 @@ body {
   margin: 1.5rem 0;
 }
 
-/* SPARKLE */
 .sparkle {
   display: inline-block;
   animation: sparkle 1.5s ease-in-out infinite;
@@ -443,7 +408,6 @@ body {
   50% { opacity: 0.6; transform: scale(1.2); }
 }
 
-/* RESPONSIVE */
 @media (max-width: 640px) {
   .card {
     padding: 2rem 1.5rem;
@@ -458,7 +422,6 @@ body {
   }
 }
 
-/* DECORATIVE ELEMENTS */
 .deco-circle {
   position: absolute;
   border-radius: 50%;
@@ -480,39 +443,36 @@ body {
   left: -100px;
 }
 
-.shinchan {
-  width: 140px;
-  height: auto;
-  display: inline-block;
+.shinchan-img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
   margin: 1rem auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-  animation: floatShinchan 3s ease-in-out infinite;
-}
-
-@keyframes floatShinchan {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  display: block;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
 <div class="gradient-bg"></div>
-
-<!-- STARS -->
 <div class="stars" id="stars"></div>
+<div class="particles" id="particles"></div>
 
-<!-- FLOATING HEARTS -->
-<div class="floating-hearts" id="hearts"></div>
+<audio id="music" loop>
+  <source src="music/birthday.mp3" type="audio/mpeg">
+</audio>
 
 <div class="container">
 
   <!-- STEP 1: WELCOME -->
   <div id="s1" class="card glass active">
+    <div class="deco-circle deco-circle-1"></div>
+    <div class="deco-circle deco-circle-2"></div>
+    
     <div style="text-align: center;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/e2f85e3a-d6c1-4d5b-8be1-00abb8bf6c64/image.png" class="shinchan" alt="Shinchan">
+      <img src="https://i.postimg.cc/nzT2bjqF/image.png" class="shinchan-img" alt="Shinchan">
       <h1 class="hero-title">Hey Maaz</h1>
       <p class="subtitle">Something special awaits you tonight...</p>
       <button class="btn" onclick="start()">
@@ -523,8 +483,11 @@ body {
 
   <!-- STEP 2: BIRTHDAY WISH -->
   <div id="s2" class="card glass">
+    <div class="deco-circle deco-circle-1"></div>
+    
     <div style="text-align: center;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/d25d8be7-e936-4ca9-ae26-55b382df7c14/image.png" class="shinchan" alt="Shinchan Birthday">
+      <img src="https://i.postimg.cc/J4SdZJf8/image.png" class="shinchan-img" alt="Shinchan Birthday">
+      <div class="emoji-float">🎂🎉</div>
       <h2 class="hero-title">Happy Birthday!</h2>
       <p class="subtitle" style="margin-top: 1.5rem;">
         Today marks another year of your incredible journey through life. 
@@ -539,29 +502,22 @@ body {
   <!-- STEP 3: BIRTHDAY QUOTES -->
   <div id="s3" class="card glass">
     <div style="text-align: center; margin-bottom: 2rem;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/b3a08ba0-a66e-42f5-82e4-f3a08fec0f94/image.png" class="shinchan" alt="Shinchan Happy">
+      <img src="https://i.postimg.cc/q7p7C9s3/image.png" class="shinchan-img" alt="Shinchan Happy">
       <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">Words for You</h2>
     </div>
     
     <div class="quote-box">
       <div class="quote-text">
-        Your birthday is the beginning of your own personal new year. Your first birthday was a beginning, and each new birthday is a chance to begin again, to start over, to take a new grip on life.
-      </div>
-      <div class="quote-author">— Sammy Hagar</div>
-    </div>
-
-    <div class="quote-box">
-      <div class="quote-text">
-        Count your age by friends, not years. Count your life by smiles, not tears. And on this special day, may true happiness be yours.
+        Count your age by friends, not years. Count your life by smiles, not tears. And on this special day, may every hour be filled with laughter and joy.
       </div>
       <div class="quote-author">— John Lennon</div>
     </div>
 
     <div class="quote-box">
       <div class="quote-text">
-        The more you praise and celebrate your life, the more there is in life to celebrate. Today, we celebrate you.
+        Your birthday is the first day of another 365-day journey. Enjoy the ride, embrace every moment, and make it legendary.
       </div>
-      <div class="quote-author">— Oprah Winfrey</div>
+      <div class="quote-author">— Unknown</div>
     </div>
 
     <button class="btn" onclick="go(4)">
@@ -572,7 +528,7 @@ body {
   <!-- STEP 4: WHY YOU'RE SPECIAL -->
   <div id="s4" class="card glass">
     <div style="text-align: center; margin-bottom: 2rem;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/76e02c76-50e0-4385-a0e4-d27e2332d45f/image.png" class="shinchan" alt="Shinchan Cool">
+      <img src="https://i.postimg.cc/L8MCTR2F/image.png" class="shinchan-img" alt="Shinchan Cool">
       <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">What Makes You Special</h2>
     </div>
     
@@ -611,7 +567,7 @@ body {
   <!-- STEP 5: PERSONAL LETTER -->
   <div id="s5" class="card glass">
     <div style="text-align: center; margin-bottom: 2rem;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/2fb033e3-6804-466f-9fcc-9cc055fd5f16/image.png" class="shinchan" alt="Shinchan Love">
+      <img src="https://i.postimg.cc/85V8qd3c/image.png" class="shinchan-img" alt="Shinchan Love">
       <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">A Letter for You</h2>
     </div>
     
@@ -636,15 +592,14 @@ body {
   <!-- STEP 6: PHOTOS -->
   <div id="s6" class="card glass">
     <div style="text-align: center; margin-bottom: 2rem;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/f6e35087-0577-41e6-a738-7e3b99e8d2c4/image.png" class="shinchan" alt="Shinchan Camera">
+      <img src="https://i.postimg.cc/ZKHHgQjm/image.png" class="shinchan-img" alt="Shinchan Camera">
       <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">Captured Moments</h2>
     </div>
     
     <div class="photo-grid">
-      <div class="photo-item">📷</div>
-      <div class="photo-item">🎉</div>
-      <div class="photo-item">✨</div>
-      <!-- Replace with: <img src="images/maaz1.jpg" alt="Memory"> -->
+      <div class="photo-item"><img src="https://i.postimg.cc/52j2JPPz/image.png" alt="Memory 1"></div>
+      <div class="photo-item"><img src="https://i.postimg.cc/MZh9tXxn/image.png" alt="Memory 2"></div>
+      <div class="photo-item"><img src="https://i.postimg.cc/3N1DZrDg/image.png" alt="Memory 3"></div>
     </div>
 
     <p class="subtitle" style="text-align: center; margin-top: 1.5rem;">
@@ -658,19 +613,21 @@ body {
 
   <!-- STEP 7: NEW YEAR WISH -->
   <div id="s7" class="card glass">
+    <div class="deco-circle deco-circle-1"></div>
+    
     <div style="text-align: center;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/fb1f5ff3-3b75-4a5d-b89b-fb4b46d68976/image.png" class="shinchan" alt="Shinchan Party">
+      <img src="https://i.postimg.cc/hvZxd42v/image.png" class="shinchan-img" alt="Shinchan Party">
+      <div class="emoji-float">🎆🌟</div>
       <h2 class="hero-title">Happy New Year!</h2>
       
       <div class="quote-box" style="margin-top: 2rem;">
         <div class="quote-text">
-          Write it on your heart that every day is the best day in the year. Let this new year be the canvas for your dreams, painted with courage and love.
+          Tomorrow is the first blank page of a 365-page book. Write a good one. May this new year bring you courage, strength, and endless opportunities.
         </div>
-        <div class="quote-author">— Ralph Waldo Emerson</div>
       </div>
 
       <p class="subtitle" style="margin-top: 1.5rem;">
-        Cheers to 365 new chapters, untold adventures, and limitless possibilities. May this year be the story you've always dreamed of writing. ✨
+        Cheers to 365 new days of possibilities, adventures, and memories waiting to be created!
       </p>
 
       <button class="btn" onclick="go(8)">
@@ -682,29 +639,22 @@ body {
   <!-- STEP 8: NEW YEAR QUOTES -->
   <div id="s8" class="card glass">
     <div style="text-align: center; margin-bottom: 2rem;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/e4a9b21e-e2a2-4e2f-84b6-4af86b3e4bb0/image.png" class="shinchan" alt="Shinchan Thinking">
+      <img src="https://i.postimg.cc/85V8qd3c/image.png" class="shinchan-img" alt="Shinchan Thinking">
       <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">For The New Year</h2>
     </div>
     
     <div class="quote-box">
       <div class="quote-text">
-        Tomorrow is the first blank page of a 365-page book. Write a good one. Fill it with adventure, growth, and beautiful memories.
+        Cheers to a new year and another chance for us to get it right. May you find the courage to chase your dreams and the strength to achieve them.
       </div>
-      <div class="quote-author">— Brad Paisley</div>
+      <div class="quote-author">— Oprah Winfrey</div>
     </div>
 
     <div class="quote-box">
       <div class="quote-text">
-        And now we welcome the new year. Full of things that have never been. May it be filled with new adventures and endless possibilities.
+        The new year stands before us, like a chapter in a book, waiting to be written. Let's write a beautiful story together.
       </div>
-      <div class="quote-author">— Rainer Maria Rilke</div>
-    </div>
-
-    <div class="quote-box">
-      <div class="quote-text">
-        Every new beginning comes from some other beginning's end. Embrace the journey ahead with courage and hope.
-      </div>
-      <div class="quote-author">— Seneca</div>
+      <div class="quote-author">— Melody Beattie</div>
     </div>
 
     <button class="btn" onclick="go(9)">
@@ -714,8 +664,12 @@ body {
 
   <!-- STEP 9: FINAL MESSAGE -->
   <div id="s9" class="card glass">
+    <div class="deco-circle deco-circle-1"></div>
+    <div class="deco-circle deco-circle-2"></div>
+    
     <div style="text-align: center;">
-      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/0f68ac46-1b51-4dcf-af5b-05a8b2ee2dd0/image.png" class="shinchan" alt="Shinchan Celebrate">
+      <img src="https://i.postimg.cc/W4P6x25s/image.png" class="shinchan-img" alt="Shinchan Celebrate">
+      <div class="emoji-float">🎊🎂🎆</div>
       <h2 class="hero-title">Happy Birthday<br>& New Year<br>Maaz!</h2>
       
       <p class="subtitle" style="margin-top: 2rem; font-size: 1.2rem;">
@@ -735,7 +689,6 @@ body {
 </div>
 
 <script>
-// Create stars
 const starsContainer = document.getElementById('stars');
 for(let i = 0; i < 100; i++) {
   const star = document.createElement('div');
@@ -747,7 +700,91 @@ for(let i = 0; i < 100; i++) {
   starsContainer.appendChild(star);
 }
 
-// Create floating hearts
-const heartsContainer = document.getElementById('hearts');
-const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝'];
-for(let i = 0; i
+const particlesContainer = document.getElementById('particles');
+for(let i = 0; i < 30; i++) {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+  particle.style.animationDelay = Math.random() * 5 + 's';
+  particlesContainer.appendChild(particle);
+}
+
+function start() {
+  const music = document.getElementById('music');
+  music.play().catch(() => {});
+  go(2);
+}
+
+function go(n) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+}
+
+function celebrate() {
+  const colors = ['#667eea', '#764ba2', '#f093fb', '#ffd89b', '#ffffff'];
+  
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+    colors: colors
+  });
+  
+  setTimeout(() => {
+    confetti({
+      particleCount: 80,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: colors
+    });
+  }, 250);
+  
+  setTimeout(() => {
+    confetti({
+      particleCount: 80,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: colors
+    });
+  }, 400);
+  
+  setTimeout(() => {
+    confetti({
+      particleCount: 120,
+      spread: 100,
+      origin: { y: 0.3 },
+      colors: colors
+    });
+  }, 600);
+  
+  const duration = 3000;
+  const end = Date.now() + duration;
+  
+  (function frame() {
+    confetti({
+      particleCount: 3,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: colors
+    });
+    confetti({
+      particleCount: 3,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: colors
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+}
+</script>
+
+</body>
+</html>
