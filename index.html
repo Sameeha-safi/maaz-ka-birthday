@@ -3,209 +3,751 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Happy Birthday Maaz 💙</title>
+<title>Happy Birthday & New Year Maaz 🎊</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:'Poppins',sans-serif;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 20% 20%, #3b82f6 0%, transparent 40%),
-    radial-gradient(circle at 80% 30%, #60a5fa 0%, transparent 45%),
-    radial-gradient(circle at 50% 80%, #1e40af 0%, transparent 50%),
-    linear-gradient(180deg, #020617, #020617);
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --accent: #f093fb;
+  --gold: #ffd89b;
+  --text-light: #f8fafc;
 }
 
-/* 🌌 STARS */
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  border-radius:50%;
-  opacity:.6;
-  animation: twinkle 2s infinite alternate;
-}
-@keyframes twinkle{
-  from{opacity:.2;}
-  to{opacity:1;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* 🌙 MOON */
-.moon{
-  position:absolute;
-  top:8%;
-  right:10%;
-  width:120px;
-  height:120px;
-  background:#f8fafc;
-  border-radius:50%;
-  box-shadow: 0 0 40px rgba(255,255,255,.4);
-  opacity:.9;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  background: #0f0c29;
+  color: var(--text-light);
+  position: relative;
 }
 
-/* ☁️ CLOUDS */
-.cloud{
-  position:absolute;
-  bottom:10%;
-  width:200px;
-  height:60px;
-  background:rgba(255,255,255,.12);
-  border-radius:50px;
-  filter:blur(2px);
-  animation: moveCloud 30s linear infinite;
-}
-@keyframes moveCloud{
-  from{transform:translateX(-250px);}
-  to{transform:translateX(120vw);}
+/* ANIMATED GRADIENT BACKGROUND */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
 }
 
-/* 💎 CARD */
-.card{
-  display:none;
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(18px);
-  border-radius:30px;
-  padding:26px;
-  animation: rise .8s ease;
-}
-.card.active{display:block;}
-@keyframes rise{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* ✍️ LETTER */
-.letter{
-  font-family:'Patrick Hand',cursive;
-  font-size:1.15rem;
-  line-height:1.7;
+/* STARS */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* 🧸 FLOAT */
-.float{
-  animation: float 3s ease-in-out infinite;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-14px);}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: twinkle 3s infinite alternate;
 }
 
-.btn{
-  background:linear-gradient(135deg,#93c5fd,#2563eb);
-  padding:14px;
-  border-radius:999px;
-  width:100%;
-  font-weight:600;
-  margin-top:18px;
+@keyframes twinkle {
+  from { opacity: 0.3; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+/* FLOATING HEARTS */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  animation: floatHeart linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(110vh) translateX(0) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(100px) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}
+
+/* GLASS MORPHISM */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              0 0 100px rgba(102, 126, 234, 0.2);
+  position: relative;
+}
+
+.glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(102, 126, 234, 0.05) 100%);
+  border-radius: 30px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* CONTAINER */
+.container {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* CARD */
+.card {
+  display: none;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 30px;
+  padding: 3rem 2rem;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.card.active {
+  display: block;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* TYPOGRAPHY */
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffd89b, #ffffff, #f093fb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* QUOTE CARD */
+.quote-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.quote-box::before {
+  content: '"';
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  font-family: 'Playfair Display', serif;
+  font-size: 100px;
+  color: rgba(255, 255, 255, 0.1);
+  line-height: 1;
+}
+
+.quote-box::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(240, 147, 251, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+}
+
+.quote-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+}
+
+.quote-box:hover::after {
+  bottom: -30px;
+  right: -30px;
+  background: radial-gradient(circle, rgba(240, 147, 251, 0.25) 0%, transparent 70%);
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 1rem;
+}
+
+.quote-author {
+  text-align: right;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* TRAITS */
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.trait-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.trait-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.trait-item:hover::before {
+  transform: scaleX(1);
+}
+
+.trait-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.trait-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.trait-text {
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* PHOTO GRID */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.photo-item {
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+  position: relative;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(240, 147, 251, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-item:hover {
+  transform: scale(1.08) rotate(2deg);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+  z-index: 10;
+}
+
+/* BUTTON */
+.btn {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+  color: #1a1a2e;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(255, 216, 155, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 216, 155, 0.5);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* LETTER */
+.letter-content {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border-left: 4px solid var(--gold);
+  border-radius: 15px;
+  margin: 1.5rem 0;
+}
+
+/* SPARKLE */
+.sparkle {
+  display: inline-block;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .photo-grid {
+    gap: 0.75rem;
+  }
+  
+  .traits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DECORATIVE ELEMENTS */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.deco-circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -150px;
+}
+
+.deco-circle-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -100px;
+  left: -100px;
+}
+
+.shinchan {
+  width: 140px;
+  height: auto;
+  display: inline-block;
+  margin: 1rem auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  animation: floatShinchan 3s ease-in-out infinite;
+}
+
+@keyframes floatShinchan {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 </style>
 </head>
 
-<body class="flex items-center justify-center p-4 text-white">
+<body>
 
-<!-- 🌙 MOON -->
-<div class="moon"></div>
+<!-- BACKGROUND -->
+<div class="gradient-bg"></div>
 
-<!-- ☁️ CLOUDS -->
-<div class="cloud" style="left:-20%; animation-delay:0s"></div>
-<div class="cloud" style="left:-30%; bottom:18%; animation-delay:10s"></div>
+<!-- STARS -->
+<div class="stars" id="stars"></div>
 
-<!-- ⭐ STARS -->
-<script>
-for(let i=0;i<140;i++){
-  const s=document.createElement("div");
-  s.className="star";
-  s.style.left=Math.random()*100+"vw";
-  s.style.top=Math.random()*100+"vh";
-  s.style.animationDuration=(Math.random()*3+2)+"s";
-  document.body.appendChild(s);
-}
-</script>
+<!-- FLOATING HEARTS -->
+<div class="floating-hearts" id="hearts"></div>
 
-<!-- 🎵 MUSIC -->
-<audio id="music" loop>
-  <source src="music/talwiinder.mp3" type="audio/mpeg">
-</audio>
+<div class="container">
 
-<!-- STEP 1 -->
-<div id="s1" class="card active max-w-sm w-full text-center">
-  <div class="text-6xl float">🧸🌌</div>
-  <h1 class="text-3xl font-bold mt-4">Hey Maaz</h1>
-  <p class="opacity-90 mt-2">Welcome to your little night-sky world ✨</p>
-  <button class="btn" onclick="start()">Enter 🌙</button>
-</div>
-
-<!-- STEP 2 -->
-<div id="s2" class="card max-w-sm w-full text-center">
-  <div class="text-6xl float">🎂💫</div>
-  <h2 class="text-3xl font-bold mt-4">Happy Birthday</h2>
-  <p class="opacity-90 mt-3">The universe feels softer today.</p>
-  <button class="btn" onclick="go(3)">Next ✨</button>
-</div>
-
-<!-- STEP 3 -->
-<div id="s3" class="card max-w-sm w-full">
-  <h2 class="text-2xl font-bold text-center mb-4">Why You’re Special 🧸</h2>
-  <div class="space-y-3">
-    <div class="bg-white text-black rounded-xl p-3">🌟 Calm soul</div>
-    <div class="bg-white text-black rounded-xl p-3">🤍 Safe energy</div>
-    <div class="bg-white text-black rounded-xl p-3">🫶 Always real</div>
+  <!-- STEP 1: WELCOME -->
+  <div id="s1" class="card glass active">
+    <div style="text-align: center;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/e2f85e3a-d6c1-4d5b-8be1-00abb8bf6c64/image.png" class="shinchan" alt="Shinchan">
+      <h1 class="hero-title">Hey Maaz</h1>
+      <p class="subtitle">Something special awaits you tonight...</p>
+      <button class="btn" onclick="start()">
+        <span style="position: relative; z-index: 1;">Enter ✨</span>
+      </button>
+    </div>
   </div>
-  <button class="btn" onclick="go(4)">Letter ✍️</button>
-</div>
 
-<!-- STEP 4 -->
-<div id="s4" class="card max-w-sm w-full">
-  <h2 class="text-2xl font-bold text-center mb-4">A Little Letter 💌</h2>
-  <p class="letter">
-    Dear Maaz,<br><br>
-    You feel like a calm night sky —
-    quiet, warm, and full of light 🌙✨<br><br>
-    I’m really grateful for you.
-  </p>
-  <button class="btn" onclick="go(5)">Photos 📸</button>
-</div>
-
-<!-- STEP 5 -->
-<div id="s5" class="card max-w-sm w-full text-center">
-  <h2 class="text-2xl font-bold mb-3">Moments 💙</h2>
-  <div class="grid grid-cols-3 gap-2">
-    <img src="images/maaz1.jpg" class="rounded-2xl">
-    <img src="images/maaz2.jpg" class="rounded-2xl">
-    <img src="images/maaz3.jpg" class="rounded-2xl">
+  <!-- STEP 2: BIRTHDAY WISH -->
+  <div id="s2" class="card glass">
+    <div style="text-align: center;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/d25d8be7-e936-4ca9-ae26-55b382df7c14/image.png" class="shinchan" alt="Shinchan Birthday">
+      <h2 class="hero-title">Happy Birthday!</h2>
+      <p class="subtitle" style="margin-top: 1.5rem;">
+        Today marks another year of your incredible journey through life. 
+        May this special day bring you endless joy and unforgettable moments.
+      </p>
+      <button class="btn" onclick="go(3)">
+        <span style="position: relative; z-index: 1;">Continue 💫</span>
+      </button>
+    </div>
   </div>
-  <button class="btn" onclick="go(6)">Final 🌠</button>
-</div>
 
-<!-- STEP 6 -->
-<div id="s6" class="card max-w-sm w-full text-center">
-  <div class="text-6xl float">🌌🧸</div>
-  <h2 class="text-3xl font-bold mt-4">Happy Birthday Maaz</h2>
-  <p class="opacity-90 mt-3">May life be kind and bright.</p>
-  <button class="btn" onclick="celebrate()">Celebrate 🎉</button>
+  <!-- STEP 3: BIRTHDAY QUOTES -->
+  <div id="s3" class="card glass">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/b3a08ba0-a66e-42f5-82e4-f3a08fec0f94/image.png" class="shinchan" alt="Shinchan Happy">
+      <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">Words for You</h2>
+    </div>
+    
+    <div class="quote-box">
+      <div class="quote-text">
+        Your birthday is the beginning of your own personal new year. Your first birthday was a beginning, and each new birthday is a chance to begin again, to start over, to take a new grip on life.
+      </div>
+      <div class="quote-author">— Sammy Hagar</div>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">
+        Count your age by friends, not years. Count your life by smiles, not tears. And on this special day, may true happiness be yours.
+      </div>
+      <div class="quote-author">— John Lennon</div>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">
+        The more you praise and celebrate your life, the more there is in life to celebrate. Today, we celebrate you.
+      </div>
+      <div class="quote-author">— Oprah Winfrey</div>
+    </div>
+
+    <button class="btn" onclick="go(4)">
+      <span style="position: relative; z-index: 1;">Next 🌟</span>
+    </button>
+  </div>
+
+  <!-- STEP 4: WHY YOU'RE SPECIAL -->
+  <div id="s4" class="card glass">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/76e02c76-50e0-4385-a0e4-d27e2332d45f/image.png" class="shinchan" alt="Shinchan Cool">
+      <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">What Makes You Special</h2>
+    </div>
+    
+    <div class="traits-grid">
+      <div class="trait-item">
+        <span class="trait-emoji">🌟</span>
+        <div class="trait-text">Genuine Soul</div>
+      </div>
+      <div class="trait-item">
+        <span class="trait-emoji">💎</span>
+        <div class="trait-text">Rare Energy</div>
+      </div>
+      <div class="trait-item">
+        <span class="trait-emoji">🎯</span>
+        <div class="trait-text">Always Real</div>
+      </div>
+      <div class="trait-item">
+        <span class="trait-emoji">🔥</span>
+        <div class="trait-text">Passionate</div>
+      </div>
+      <div class="trait-item">
+        <span class="trait-emoji">🤝</span>
+        <div class="trait-text">Loyal Friend</div>
+      </div>
+      <div class="trait-item">
+        <span class="trait-emoji">✨</span>
+        <div class="trait-text">Positive Vibes</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="go(5)">
+      <span style="position: relative; z-index: 1;">A Letter 💌</span>
+    </button>
+  </div>
+
+  <!-- STEP 5: PERSONAL LETTER -->
+  <div id="s5" class="card glass">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/2fb033e3-6804-466f-9fcc-9cc055fd5f16/image.png" class="shinchan" alt="Shinchan Love">
+      <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">A Letter for You</h2>
+    </div>
+    
+    <div class="letter-content">
+      Dear Maaz,<br><br>
+      
+      As you celebrate another year, I want you to know how much you mean to those around you. Your presence brings comfort, your smile brings light, and your friendship brings joy.<br><br>
+      
+      You have this incredible ability to make people feel valued and heard. That's rare, and that's special.<br><br>
+      
+      Keep being the amazing person you are. The world needs more people like you.<br><br>
+      
+      With appreciation and warmth,<br>
+      Your Friend 💙
+    </div>
+
+    <button class="btn" onclick="go(6)">
+      <span style="position: relative; z-index: 1;">Memories 📸</span>
+    </button>
+  </div>
+
+  <!-- STEP 6: PHOTOS -->
+  <div id="s6" class="card glass">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/f6e35087-0577-41e6-a738-7e3b99e8d2c4/image.png" class="shinchan" alt="Shinchan Camera">
+      <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">Captured Moments</h2>
+    </div>
+    
+    <div class="photo-grid">
+      <div class="photo-item">📷</div>
+      <div class="photo-item">🎉</div>
+      <div class="photo-item">✨</div>
+      <!-- Replace with: <img src="images/maaz1.jpg" alt="Memory"> -->
+    </div>
+
+    <p class="subtitle" style="text-align: center; margin-top: 1.5rem;">
+      Every moment captured is a memory treasured forever
+    </p>
+
+    <button class="btn" onclick="go(7)">
+      <span style="position: relative; z-index: 1;">New Year 🎊</span>
+    </button>
+  </div>
+
+  <!-- STEP 7: NEW YEAR WISH -->
+  <div id="s7" class="card glass">
+    <div style="text-align: center;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/fb1f5ff3-3b75-4a5d-b89b-fb4b46d68976/image.png" class="shinchan" alt="Shinchan Party">
+      <h2 class="hero-title">Happy New Year!</h2>
+      
+      <div class="quote-box" style="margin-top: 2rem;">
+        <div class="quote-text">
+          Write it on your heart that every day is the best day in the year. Let this new year be the canvas for your dreams, painted with courage and love.
+        </div>
+        <div class="quote-author">— Ralph Waldo Emerson</div>
+      </div>
+
+      <p class="subtitle" style="margin-top: 1.5rem;">
+        Cheers to 365 new chapters, untold adventures, and limitless possibilities. May this year be the story you've always dreamed of writing. ✨
+      </p>
+
+      <button class="btn" onclick="go(8)">
+        <span style="position: relative; z-index: 1;">More Wishes 🌠</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 8: NEW YEAR QUOTES -->
+  <div id="s8" class="card glass">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/e4a9b21e-e2a2-4e2f-84b6-4af86b3e4bb0/image.png" class="shinchan" alt="Shinchan Thinking">
+      <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3rem);">For The New Year</h2>
+    </div>
+    
+    <div class="quote-box">
+      <div class="quote-text">
+        Tomorrow is the first blank page of a 365-page book. Write a good one. Fill it with adventure, growth, and beautiful memories.
+      </div>
+      <div class="quote-author">— Brad Paisley</div>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">
+        And now we welcome the new year. Full of things that have never been. May it be filled with new adventures and endless possibilities.
+      </div>
+      <div class="quote-author">— Rainer Maria Rilke</div>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-text">
+        Every new beginning comes from some other beginning's end. Embrace the journey ahead with courage and hope.
+      </div>
+      <div class="quote-author">— Seneca</div>
+    </div>
+
+    <button class="btn" onclick="go(9)">
+      <span style="position: relative; z-index: 1;">Final Message 🎁</span>
+    </button>
+  </div>
+
+  <!-- STEP 9: FINAL MESSAGE -->
+  <div id="s9" class="card glass">
+    <div style="text-align: center;">
+      <img src="https://files.claud.ai/user_uploads/16703283-3d09-496a-88a9-bc28a43e4fa7/0f68ac46-1b51-4dcf-af5b-05a8b2ee2dd0/image.png" class="shinchan" alt="Shinchan Celebrate">
+      <h2 class="hero-title">Happy Birthday<br>& New Year<br>Maaz!</h2>
+      
+      <p class="subtitle" style="margin-top: 2rem; font-size: 1.2rem;">
+        May your birthday be the start of a year filled with good luck, good health, and much happiness. 
+        <br><br>
+        Here's to celebrating you today and cheering you on throughout the year ahead!
+        <br><br>
+        <span class="sparkle">✨</span> Make it unforgettable <span class="sparkle">✨</span>
+      </p>
+
+      <button class="btn" onclick="celebrate()">
+        <span style="position: relative; z-index: 1;">Celebrate! 🎉</span>
+      </button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-function start(){
-  document.getElementById("music").play();
-  go(2);
+// Create stars
+const starsContainer = document.getElementById('stars');
+for(let i = 0; i < 100; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.animationDelay = Math.random() * 3 + 's';
+  star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+  starsContainer.appendChild(star);
 }
-function go(n){
-  document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
-  document.getElementById("s"+n).classList.add("active");
-}
-function celebrate(){
-  confetti({particleCount:260,spread:100,origin:{y:.6}});
-}
-</script>
 
-</body>
-</html>
+// Create floating hearts
+const heartsContainer = document.getElementById('hearts');
+const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+for(let i = 0; i
