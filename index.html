@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Maaz 🎉</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #020617, #1e3a8a);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .step {
+      display: none;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 24px;
+      color: white;
+    }
+
+    .step.active {
+      display: block;
+      animation: fade 0.7s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-top: 20px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="flex items-center justify-center p-4">
+
+  <!-- MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="music/talwiinder.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- STEP 1 -->
+  <div id="step1" class="step active max-w-md w-full text-center">
+    <h1 class="text-3xl font-bold mb-4">Hey Maaz 👋</h1>
+    <p class="opacity-90">I made this just for you…</p>
+    <button class="btn" onclick="start()">Start 🎵</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="step max-w-md w-full text-center">
+    <h2 class="text-3xl font-bold mb-4">🎉 Happy Birthday 🎉</h2>
+    <p class="opacity-90">
+      Another year older, stronger, and more legendary.
+    </p>
+    <button class="btn" onclick="next(3)">See Why You’re Special 💙</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="step max-w-md w-full text-center">
+    <h2 class="text-2xl font-bold mb-4">Why Maaz is Different 😎</h2>
+    <div class="space-y-3 text-left">
+      <div class="bg-white text-black rounded-xl p-3">🔥 Always confident</div>
+      <div class="bg-white text-black rounded-xl p-3">🤝 Loyal best friend</div>
+      <div class="bg-white text-black rounded-xl p-3">💯 Never fake</div>
+    </div>
+    <button class="btn" onclick="next(4)">Photos Time 📸</button>
+  </div>
+
+  <!-- STEP 4 (PHOTOS) -->
+  <div id="step4" class="step max-w-md w-full text-center">
+    <h2 class="text-2xl font-bold mb-4">Some Moments 💙</h2>
+
+    <div class="grid grid-cols-3 gap-2">
+      <img src="images/maaz1.jpg" class="rounded-xl">
+      <img src="images/maaz2.jpg" class="rounded-xl">
+      <img src="images/maaz3.jpg" class="rounded-xl">
+    </div>
+
+    <p class="mt-4 opacity-80 text-sm">
+      Every picture has a story.
+    </p>
+
+    <button class="btn" onclick="next(5)">Final Message 🎂</button>
+  </div>
+
+  <!-- STEP 5 -->
+  <div id="step5" class="step max-w-md w-full text-center">
+    <h2 class="text-3xl font-bold mb-4">🎂 Cheers to You 🎂</h2>
+    <p class="opacity-90 mb-4">
+      May this year bring success, peace,
+      good health and big wins.
+    </p>
+    <p class="font-semibold mb-6">Happy Birthday Maaz 💙</p>
+    <button class="btn" onclick="celebrate()">Celebrate 🎉</button>
+    <p class="mt-6 text-sm opacity-70">Made with 💙 by your bestie</p>
+  </div>
+
+  <script>
+    function start() {
+      document.getElementById("bgMusic").play();
+      next(2);
+    }
+
+    function next(step) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + step).classList.add('active');
+    }
+
+    function celebrate() {
+      confetti({
+        particleCount: 250,
+        spread: 90,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+
+</body>
+</html>
